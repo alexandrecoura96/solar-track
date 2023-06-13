@@ -1,10 +1,10 @@
 import React from 'react';
-import {View as RNView, Text} from 'react-native';
+import {Container, Title} from './styles';
 
 export function View() {
   return (
-    <RNView>
-      <Text>Welcome</Text>
-    </RNView>
+    <Container>
+      <Title>Welcome</Title>
+    </Container>
   );
 }
