@@ -1,10 +1,10 @@
 import React from 'react';
-import {Container, Title} from './styles';
+import {View as RNView, Text} from 'react-native';
 
-export function View() {
+export const View = () => {
   return (
-    <Container>
-      <Title>Welcome</Title>
-    </Container>
+    <RNView>
+      <Text>Home</Text>
+    </RNView>
   );
-}
+};
