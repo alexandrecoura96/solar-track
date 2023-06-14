@@ -30,28 +30,5 @@ export const Content = styled.View`
 export const Title = styled.Text`
   color: #fff;
   font-size: ${RFValue(32)}px;
-  font-weight: bold;
-`;
-
-export const GetStarted = styled.TouchableOpacity`
-  background-color: #1a1d1a;
-  border-radius: 8px;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: ${RFValue(8)}px ${RFValue(16)}px;
-  margin-right: 8px;
-  margin-left: 8px;
-  align-items: center;
-`;
-
-export const GetStartedText = styled.Text`
-  color: #fff;
-  font-size: ${RFValue(16)}px;
-  font-weight: bold;
-`;
-
-export const GetStartedIconWrapper = styled.View`
-  border-radius: ${RFValue(4)}px;
-  padding: ${RFValue(8)}px;
-  background-color: #aaf551;
+  font-family: 'InterTight-BlackItalic';
 `;
