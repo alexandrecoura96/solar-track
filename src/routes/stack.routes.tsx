@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Home} from '../screens/Home';
 import {Welcome} from '../screens/Welcome';
+import {AppTabRoutes} from './tab.routes';
 
 const Stack = createStackNavigator();
 
@@ -10,8 +10,8 @@ export function StackRoutes() {
     <Stack.Navigator
       initialRouteName="Welcome"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Welcome" component={Welcome} />
+      <Stack.Screen name="Home" component={AppTabRoutes} />
     </Stack.Navigator>
   );
 }
