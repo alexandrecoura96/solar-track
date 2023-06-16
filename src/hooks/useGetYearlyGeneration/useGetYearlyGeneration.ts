@@ -1,3 +1,4 @@
+import numeral from 'numeral';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import {GetYearlyProps} from '../../models/hooks/useGetYearlyGeneration/types/useGetYearlyGeneration';
@@ -20,9 +21,19 @@ export const useGetYearlyGeneration = () => {
     }
   }
 
+  const formattedData = {
+    period: data ? data?.x_labels : null,
+    generation: data ? data?.generation : null,
+    expected: data ? data?.expected : null,
+    kwh: data ? numeral(data?.totals.kwh).format('br') : null,
+    percentage: data ? data?.totals.percentage / 100 : null,
+    trees: data ? Math.round(data?.totals.trees) : null,
+    co2: data ? Math.round(data?.totals.co2) : null,
+  };
+
   return {
     loading,
     fetchYearlySolarGeneration,
-    data,
+    formattedData,
   };
 };
