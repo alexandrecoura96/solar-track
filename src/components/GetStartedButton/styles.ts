@@ -19,7 +19,7 @@ export const GetStartedText = styled.Text`
 export const GetStartedIconWrapper = styled.View`
   border-radius: ${RFValue(4)}px;
   padding: ${RFValue(8)}px;
-  background-color: #aaf551;
+  background-color: #f4a460;
   align-items: center;
   justify-content: center;
 `;
