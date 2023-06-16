@@ -2,7 +2,8 @@ import {useEffect} from 'react';
 import {useGetYearlyGeneration} from '../../hooks/useGetYearlyGeneration/useGetYearlyGeneration';
 
 export const useHomeViewModel = () => {
-  const {loading, data, fetchYearlySolarGeneration} = useGetYearlyGeneration();
+  const {loading, formattedData, fetchYearlySolarGeneration} =
+    useGetYearlyGeneration();
 
   useEffect(() => {
     fetchYearlySolarGeneration();
@@ -11,6 +12,6 @@ export const useHomeViewModel = () => {
 
   return {
     loading,
-    data,
+    data: formattedData,
   };
 };
