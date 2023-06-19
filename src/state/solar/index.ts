@@ -2,7 +2,31 @@ import {create} from 'zustand';
 import {GetYearlyProps} from '../../models/hooks/useGetYearlyGeneration/types/useGetYearlyGeneration';
 
 const initialState = {
-  solarGeneration: {
+  solarGenerationDaily: {
+    data_type: '',
+    x_labels: [],
+    generation: [],
+    expected: [],
+    totals: {
+      kwh: 0,
+      percentage: 0,
+      trees: 0,
+      co2: 0,
+    },
+  },
+  solarGenerationMonthly: {
+    data_type: '',
+    x_labels: [],
+    generation: [],
+    expected: [],
+    totals: {
+      kwh: 0,
+      percentage: 0,
+      trees: 0,
+      co2: 0,
+    },
+  },
+  solarGenerationYearly: {
     data_type: '',
     x_labels: [],
     generation: [],
@@ -21,12 +45,22 @@ export const useSolarStore = create(
     set,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     get: () => {
-      solarGeneration: GetYearlyProps;
-      setSolarGeneration: (value: GetYearlyProps) => void;
+      solarGenerationYearly: GetYearlyProps;
+      setSolarGenerationYearly: (value: GetYearlyProps) => void;
+      solarGenerationDaily: GetYearlyProps;
+      setSolarGenerationDaily: (value: GetYearlyProps) => void;
+      solarGenerationMonthly: GetYearlyProps;
+      setSolarGenerationMonthly: (value: GetYearlyProps) => void;
     },
   ) => ({
-    setSolarGeneration: (value: GetYearlyProps) => {
-      set({solarGeneration: value});
+    setSolarGenerationYearly: (value: GetYearlyProps) => {
+      set({solarGenerationYearly: value});
+    },
+    setSolarGenerationDaily: (value: GetYearlyProps) => {
+      set({solarGenerationDaily: value});
+    },
+    setSolarGenerationMonthly: (value: GetYearlyProps) => {
+      set({solarGenerationMonthly: value});
     },
     ...initialState,
   }),
