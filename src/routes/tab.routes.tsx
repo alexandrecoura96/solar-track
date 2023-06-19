@@ -1,9 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {TabIcon} from '../components/TabIcon';
-import {Graphics} from '../screens/Graphics';
 import {Home} from '../screens/Home';
-import {Settings} from '../screens/Settings';
+import {Statistic} from '../screens/Statistic';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,26 +35,14 @@ export function AppTabRoutes() {
       />
 
       <Tab.Screen
-        name="Graphics"
-        component={Graphics}
+        name="Statistic"
+        component={Statistic}
         options={{
           headerShown: false,
-          tabBarLabel: 'Graphics',
+          tabBarLabel: 'Statistic',
           tabBarInactiveTintColor: '#4F504D',
           tabBarActiveTintColor: '#f4a460',
           tabBarIcon: ({color}) => TabIcon({color}).Graphics,
-        }}
-      />
-
-      <Tab.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Settings',
-          tabBarInactiveTintColor: '#4F504D',
-          tabBarActiveTintColor: '#f4a460',
-          tabBarIcon: ({color}) => TabIcon({color}).Settings,
         }}
       />
     </Tab.Navigator>
