@@ -6,14 +6,14 @@ import {useSolarStore} from '../../state/solar';
 
 export const useGetYearlyGeneration = () => {
   const [loading, setLoading] = useState(true);
-  const {solarGeneration, setSolarGeneration} = useSolarStore();
+  const {solarGenerationYearly, setSolarGenerationYearly} = useSolarStore();
 
   async function fetchYearlySolarGeneration() {
     try {
       const response = await api.get('/plant/generation/test-2023', {
         params: {dataType: 'yearly'},
       });
-      setSolarGeneration(response.data.data);
+      setSolarGenerationYearly(response.data.data);
     } catch (error) {
       Alert.alert('Ops', 'Its not possible to load the information');
     } finally {
@@ -21,23 +21,29 @@ export const useGetYearlyGeneration = () => {
     }
   }
 
-  const formattedData = {
-    period: solarGeneration ? solarGeneration?.x_labels : null,
-    generation: solarGeneration ? solarGeneration?.generation : null,
-    expected: solarGeneration ? solarGeneration?.expected : null,
-    kwh: solarGeneration
-      ? numeral(solarGeneration?.totals.kwh).format('br')
+  const formattedYearlyData = {
+    period: solarGenerationYearly ? solarGenerationYearly?.x_labels : null,
+    generation: solarGenerationYearly
+      ? solarGenerationYearly?.generation
       : null,
-    percentage: solarGeneration
-      ? solarGeneration?.totals.percentage / 100
+    expected: solarGenerationYearly ? solarGenerationYearly?.expected : null,
+    kwh: solarGenerationYearly
+      ? numeral(solarGenerationYearly?.totals.kwh).format()
       : null,
-    trees: solarGeneration ? Math.round(solarGeneration?.totals.trees) : null,
-    co2: solarGeneration ? Math.round(solarGeneration?.totals.co2) : null,
+    percentage: solarGenerationYearly
+      ? solarGenerationYearly?.totals.percentage / 100
+      : null,
+    trees: solarGenerationYearly
+      ? Math.round(solarGenerationYearly?.totals.trees)
+      : null,
+    co2: solarGenerationYearly
+      ? numeral(solarGenerationYearly?.totals.co2).format()
+      : null,
   };
 
   return {
     loading,
     fetchYearlySolarGeneration,
-    formattedData,
+    formattedYearlyData,
   };
 };
