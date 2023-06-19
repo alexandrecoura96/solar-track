@@ -1,4 +1,3 @@
-import numeral from 'numeral';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import {api} from '../../services/axios';
@@ -6,7 +5,7 @@ import {useSolarStore} from '../../state/solar';
 
 export const useGetYearlyGeneration = () => {
   const [loading, setLoading] = useState(true);
-  const {solarGenerationYearly, setSolarGenerationYearly} = useSolarStore();
+  const {setSolarGenerationYearly} = useSolarStore();
 
   async function fetchYearlySolarGeneration() {
     try {
@@ -21,29 +20,8 @@ export const useGetYearlyGeneration = () => {
     }
   }
 
-  const formattedYearlyData = {
-    period: solarGenerationYearly ? solarGenerationYearly?.x_labels : null,
-    generation: solarGenerationYearly
-      ? solarGenerationYearly?.generation
-      : null,
-    expected: solarGenerationYearly ? solarGenerationYearly?.expected : null,
-    kwh: solarGenerationYearly
-      ? numeral(solarGenerationYearly?.totals.kwh).format()
-      : null,
-    percentage: solarGenerationYearly
-      ? solarGenerationYearly?.totals.percentage / 100
-      : null,
-    trees: solarGenerationYearly
-      ? Math.round(solarGenerationYearly?.totals.trees)
-      : null,
-    co2: solarGenerationYearly
-      ? numeral(solarGenerationYearly?.totals.co2).format()
-      : null,
-  };
-
   return {
     loading,
     fetchYearlySolarGeneration,
-    formattedYearlyData,
   };
 };

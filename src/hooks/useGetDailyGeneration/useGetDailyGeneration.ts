@@ -1,4 +1,3 @@
-import numeral from 'numeral';
 import {useState} from 'react';
 import {Alert} from 'react-native';
 import {api} from '../../services/axios';
@@ -6,7 +5,7 @@ import {useSolarStore} from '../../state/solar';
 
 export const useGetDailyGeneration = () => {
   const [loading, setLoading] = useState(true);
-  const {solarGenerationDaily, setSolarGenerationDaily} = useSolarStore();
+  const {setSolarGenerationDaily} = useSolarStore();
 
   async function fetchDailySolarGeneration() {
     try {
@@ -21,27 +20,8 @@ export const useGetDailyGeneration = () => {
     }
   }
 
-  const formattedDailyData = {
-    period: solarGenerationDaily ? solarGenerationDaily?.x_labels : null,
-    generation: solarGenerationDaily ? solarGenerationDaily?.generation : null,
-    expected: solarGenerationDaily ? solarGenerationDaily?.expected : null,
-    kwh: solarGenerationDaily
-      ? numeral(solarGenerationDaily?.totals.kwh).format()
-      : null,
-    percentage: solarGenerationDaily
-      ? solarGenerationDaily?.totals.percentage / 100
-      : null,
-    trees: solarGenerationDaily
-      ? Math.round(solarGenerationDaily?.totals.trees)
-      : null,
-    co2: solarGenerationDaily
-      ? numeral(solarGenerationDaily?.totals.co2).format()
-      : null,
-  };
-
   return {
     loading,
     fetchDailySolarGeneration,
-    formattedDailyData,
   };
 };

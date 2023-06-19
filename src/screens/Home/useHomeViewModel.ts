@@ -1,75 +1,59 @@
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {useCallback, useEffect, useRef, useState} from 'react';
-import {Alert} from 'react-native';
+import numeral from 'numeral';
+import {useCallback, useRef, useState} from 'react';
 import {Modalize} from 'react-native-modalize';
-import {useGetDailyGeneration} from '../../hooks/useGetDailyGeneration/useGetDailyGeneration';
-import {useGetMonthlyGeneration} from '../../hooks/useGetMonthlyGeneration/useGetMonthlyGeneration';
-import {useGetYearlyGeneration} from '../../hooks/useGetYearlyGeneration/useGetYearlyGeneration';
+import {useSolarStore} from '../../state/solar';
 
 export const useHomeViewModel = () => {
   const modalRef = useRef<Modalize>(null);
   const tabBarHeight = useBottomTabBarHeight();
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
   const [selected, setSelected] = useState({
     daily: true,
     monthly: false,
     yearly: false,
   });
+  const {solarGenerationDaily, solarGenerationMonthly, solarGenerationYearly} =
+    useSolarStore();
 
-  const {formattedDailyData, fetchDailySolarGeneration} =
-    useGetDailyGeneration();
+  const [selectedData, setSelectedData] = useState(solarGenerationDaily);
 
-  const {formattedMonthlyData, fetchMonthlySolarGeneration} =
-    useGetMonthlyGeneration();
-
-  const {formattedYearlyData, fetchYearlySolarGeneration} =
-    useGetYearlyGeneration();
-
-  const fetchAll = async () => {
-    try {
-      await fetchDailySolarGeneration();
-      await fetchYearlySolarGeneration();
-      await fetchMonthlySolarGeneration();
-    } catch (error) {
-      Alert.alert('Ops, error');
-    } finally {
-      setLoading(false);
-    }
+  const formattedData = {
+    period: selectedData ? selectedData?.x_labels : null,
+    generation: selectedData ? selectedData?.generation : null,
+    expected: selectedData ? selectedData?.expected : null,
+    kwh: selectedData ? numeral(selectedData?.totals.kwh).format() : null,
+    percentage: selectedData ? selectedData?.totals.percentage / 100 : null,
+    trees: selectedData ? Math.round(selectedData?.totals.trees) : null,
+    co2: selectedData ? numeral(selectedData?.totals.co2).format() : null,
   };
-
-  const [selectedData, setSelectedData] = useState(formattedDailyData);
 
   const onHandleOpenModal = useCallback(() => {
     modalRef.current?.open();
   }, []);
 
   const onHandleDailyOption = useCallback(() => {
-    setSelectedData(formattedDailyData);
+    setSelectedData(solarGenerationDaily);
     setSelected({daily: true, monthly: false, yearly: false});
     modalRef.current?.close();
-  }, [formattedDailyData]);
+  }, [solarGenerationDaily]);
 
   const onHandleMonthlyOption = useCallback(() => {
-    setSelectedData(formattedMonthlyData);
+    setSelectedData(solarGenerationMonthly);
     setSelected({daily: false, monthly: true, yearly: false});
 
     modalRef.current?.close();
-  }, [formattedMonthlyData]);
+  }, [solarGenerationMonthly]);
 
   const onHandleYearlyOption = useCallback(() => {
-    setSelectedData(formattedYearlyData);
+    setSelectedData(solarGenerationYearly);
     setSelected({daily: false, monthly: false, yearly: true});
     modalRef.current?.close();
-  }, [formattedYearlyData]);
-
-  useEffect(() => {
-    fetchAll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [solarGenerationYearly]);
 
   return {
     loading,
-    data: selectedData,
+    data: formattedData,
     onHandleOpenModal,
     modalRef,
     tabBarHeight,

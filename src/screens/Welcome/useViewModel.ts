@@ -9,6 +9,7 @@ export const useViewModel = () => {
   }, [navigation]);
 
   return {
+    loading: false,
     handleNavigation,
   };
 };
