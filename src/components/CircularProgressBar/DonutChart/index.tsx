@@ -1,5 +1,5 @@
 import {Path, Skia, Text} from '@shopify/react-native-skia';
-import React, {FC} from 'react';
+import React, {FC, useCallback} from 'react';
 import EnergyIcon from '../../../assets/svg/energy.svg';
 import {Container, EnergyIconWrapper, StyledCanvas} from './styles';
 import {DonutChartProps} from './types';
@@ -19,12 +19,23 @@ export const DonutChart: FC<DonutChartProps> = ({
 
   const width = font.getTextWidth(targetText);
 
+  const checkColor = useCallback(() => {
+    if (Number(targetText) >= 60) {
+      return '#09ff00';
+    }
+    if (Number(targetText) <= 40) {
+      return '#ff060e';
+    }
+
+    return '#fcdf00';
+  }, [targetText]);
+
   return (
     <Container>
       <StyledCanvas>
         <Path
           path={path}
-          color="orange"
+          color={checkColor()}
           style="stroke"
           strokeJoin="round"
           strokeWidth={strokeWidth}
@@ -36,7 +47,7 @@ export const DonutChart: FC<DonutChartProps> = ({
         <Text
           x={innerRadius - width / 2}
           y={radius + strokeWidth}
-          text={`${targetText}%`}
+          text={`${targetText.slice(0, 4)}%`}
           font={font}
           color="#fff"
         />

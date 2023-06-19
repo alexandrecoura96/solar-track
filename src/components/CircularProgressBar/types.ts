@@ -1,3 +1,3 @@
 export interface CircularProgressBarProps {
-  percentage: number;
+  percentage: number | null;
 }

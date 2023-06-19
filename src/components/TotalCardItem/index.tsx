@@ -5,8 +5,8 @@ import {TotalCardItemProps} from './types';
 export function TotalCardItem({title, description}: TotalCardItemProps) {
   return (
     <Container>
-      {title && <Title>{title}</Title>}
       <Description>{description ? description : '--'}</Description>
+      {title && <Title>{title}</Title>}
     </Container>
   );
 }

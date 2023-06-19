@@ -15,7 +15,8 @@ export function CircularProgressBar({percentage}: CircularProgressBarProps) {
   const radius = PixelRatio.roundToNearestPixel(36);
   const STROKE_WIDTH = 5;
   const animationState = useValue(0);
-  const targetPercentage = percentage / 100;
+  const percentageVerify = percentage ? percentage : 0;
+  const targetPercentage = percentageVerify > 100 ? 100 : percentageVerify;
 
   const animateChart = useCallback(() => {
     animationState.current = 0;

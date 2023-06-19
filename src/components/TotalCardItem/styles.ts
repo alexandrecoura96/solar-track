@@ -5,24 +5,29 @@ export const Container = styled.View`
   flex-direction: column;
   padding: ${RFValue(8)}px ${RFValue(16)}px;
   gap: ${RFValue(8)}px;
-  background-color: #1c1c1a;
-  border-radius: ${RFValue(16)}px;
-  border-color: #838383;
-  border-width: ${RFValue(1)}px;
+
   align-items: center;
   justify-content: center;
   min-height: ${RFValue(93)}px;
   min-width: ${RFValue(146)}px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled.Text.attrs({
+  numberOfLines: 1,
+  ellipsizeMode: 'tail',
+})`
   font-size: ${RFValue(12)}px;
   font-family: 'Inter-Regular';
   color: #838383;
+  max-width: ${RFValue(120)}px;
 `;
 
-export const Description = styled.Text`
+export const Description = styled.Text.attrs({
+  numberOfLines: 1,
+  ellipsizeMode: 'tail',
+})`
   font-size: ${RFValue(16)}px;
   font-family: 'Inter-Bold';
   color: #fff;
+  max-width: ${RFValue(120)}px;
 `;

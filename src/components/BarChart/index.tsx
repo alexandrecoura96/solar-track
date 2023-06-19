@@ -1,9 +1,9 @@
 import {
   Canvas,
   Path,
-  runTiming,
   Skia,
   Text,
+  runTiming,
   useComputedValue,
   useFont,
   useValue,
@@ -11,13 +11,8 @@ import {
 import * as d3 from 'd3';
 import numeral from 'numeral';
 import React from 'react';
-import {Button, Easing, Text as RNText, StyleSheet, View} from 'react-native';
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import {Button, Easing, StyleSheet, View} from 'react-native';
+import {useSharedValue, withTiming} from 'react-native-reanimated';
 import {BarChartDataProps, BarChartProps} from './types';
 
 const GRAPH_MARGIN = 20;
@@ -47,12 +42,6 @@ export const BarChart = ({data}: BarChartProps) => {
 
   const yRange = [0, graphHeight];
   const y = d3.scaleLinear().domain(yDomain).range(yRange);
-
-  const opacityStyle = useAnimatedStyle(() => {
-    return {
-      opacity: interpolate(opacityAnimValue.value, [0, 1], [0, 1]),
-    };
-  });
 
   const animate = () => {
     animationState.current = 0;
@@ -91,21 +80,19 @@ export const BarChart = ({data}: BarChartProps) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View
-        style={[
-          {
-            flexDirection: 'row',
-            gap: 10,
-            marginBottom: 24,
-          },
-          opacityStyle,
-        ]}>
+      <Canvas style={styles.canvasTitle}>
         {data.map((dataPoint: BarChartDataProps) => (
-          <RNText key={dataPoint.label} style={{color: '#fff', fontSize: 10}}>
-            {numeral(dataPoint.value).format('0a')}
-          </RNText>
+          <Text
+            key={dataPoint.label}
+            color="#fff"
+            font={font}
+            x={x(dataPoint.label)! - 10}
+            y={CanvasHeight - 60}
+            text={numeral(dataPoint.value).format('0a')}
+            opacity={opacityAnimValue}
+          />
         ))}
-      </Animated.View>
+      </Canvas>
 
       <Canvas style={styles.canvas}>
         <Path path={path} color="#e05f25" />
@@ -130,8 +117,13 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    flex: 0.5,
     backgroundColor: '#000',
+  },
+  canvasTitle: {
+    height: CanvasHeight - 20,
+    width: CanvasWidth,
+    paddingBottom: 60,
   },
   canvas: {
     height: CanvasHeight,
