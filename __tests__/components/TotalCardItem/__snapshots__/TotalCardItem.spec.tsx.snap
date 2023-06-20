@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TotalCardItem Should render tree of snapshot test in component 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flexDirection": "column",
+      "gap": 16,
+      "justifyContent": "center",
+      "minHeight": 182,
+      "minWidth": 286,
+      "paddingBottom": 16,
+      "paddingLeft": 31,
+      "paddingRight": 31,
+      "paddingTop": 16,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      {
+        "color": "#fff",
+        "fontFamily": "Inter-Bold",
+        "fontSize": 31,
+        "maxWidth": 235,
+      }
+    }
+  >
+    description
+  </Text>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={1}
+    style={
+      {
+        "color": "#838383",
+        "fontFamily": "Inter-Regular",
+        "fontSize": 24,
+        "maxWidth": 235,
+      }
+    }
+  >
+    title
+  </Text>
+</View>
+`;

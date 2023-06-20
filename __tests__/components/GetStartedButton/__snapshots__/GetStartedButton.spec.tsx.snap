@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GetStartedButton Should render tree of snapshot test in component 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#1a1d1a",
+      "borderBottomLeftRadius": 16,
+      "borderBottomRightRadius": 16,
+      "borderTopLeftRadius": 16,
+      "borderTopRightRadius": 16,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "opacity": 1,
+      "paddingBottom": 16,
+      "paddingLeft": 31,
+      "paddingRight": 31,
+      "paddingTop": 16,
+    }
+  }
+>
+  <Text
+    style={
+      {
+        "color": "#fff",
+        "fontFamily": "InterTight-BlackItalic",
+        "fontSize": 31,
+      }
+    }
+  >
+    title
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "#f4a460",
+        "borderBottomLeftRadius": 8,
+        "borderBottomRightRadius": 8,
+        "borderTopLeftRadius": 8,
+        "borderTopRightRadius": 8,
+        "justifyContent": "center",
+        "paddingBottom": 16,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 16,
+      }
+    }
+  >
+    <play.svg
+      height={31}
+      width={31}
+    />
+  </View>
+</View>
+`;

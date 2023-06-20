@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arc Should render tree of snapshot test in component 1`] = `
+<RNSVGSvgView
+  bbHeight="451"
+  bbWidth="678"
+  focusable={false}
+  height={451}
+  style={
+    [
+      {
+        "backgroundColor": "transparent",
+        "borderWidth": 0,
+      },
+      {
+        "flex": 0,
+        "height": 451,
+        "width": 678,
+      },
+    ]
+  }
+  width={678}
+>
+  <RNSVGGroup
+    fill={
+      {
+        "payload": 4278190080,
+        "type": 0,
+      }
+    }
+  >
+    <RNSVGDefs>
+      <RNSVGLinearGradient
+        gradient={
+          [
+            0,
+            -266034,
+            1,
+            -2119059,
+          ]
+        }
+        gradientTransform={null}
+        gradientUnits={0}
+        name="grad"
+        x1="0"
+        x2="100%"
+        y1="0"
+        y2="0"
+      />
+    </RNSVGDefs>
+    <RNSVGPath
+      d="M 606.7846251381077 533.5569185088086 A 331 331 0 1 0 71.21537486189243 533.5569185088086"
+      fill={null}
+      propList={
+        [
+          "fill",
+          "stroke",
+          "strokeWidth",
+          "strokeDasharray",
+          "strokeLinecap",
+        ]
+      }
+      stroke={
+        {
+          "payload": 4293892151,
+          "type": 0,
+        }
+      }
+      strokeDasharray={
+        [
+          "1455.81403567351",
+          "1455.81403567351",
+        ]
+      }
+      strokeLinecap={1}
+      strokeWidth="16"
+    />
+    <RNSVGPath
+      d="M 606.7846251381077 533.5569185088086 A 331 331 0 1 0 71.21537486189243 533.5569185088086"
+      fill={null}
+      propList={
+        [
+          "fill",
+          "strokeWidth",
+          "strokeDasharray",
+          "strokeDashoffset",
+          "strokeLinecap",
+        ]
+      }
+      strokeDasharray={
+        [
+          "1455.81403567351",
+          "1455.81403567351",
+        ]
+      }
+      strokeDashoffset={145581.40356735102}
+      strokeLinecap={1}
+      strokeWidth="16"
+    />
+    <RNSVGText
+      content={null}
+      dx={[]}
+      dy={[]}
+      fill={
+        {
+          "payload": 4294967295,
+          "type": 0,
+        }
+      }
+      font={
+        {
+          "fontFamily": "Inter-Bold",
+          "fontSize": "32",
+          "textAnchor": "middle",
+        }
+      }
+      propList={
+        [
+          "fill",
+        ]
+      }
+      rotate={[]}
+      x={
+        [
+          "339",
+        ]
+      }
+      y={
+        [
+          "349",
+        ]
+      }
+    >
+      <RNSVGTSpan
+        content="0"
+        dx={[]}
+        dy={[]}
+        fill={
+          {
+            "payload": 4278190080,
+            "type": 0,
+          }
+        }
+        font={{}}
+        rotate={[]}
+        x={[]}
+        y={[]}
+      />
+    </RNSVGText>
+    <RNSVGPath
+      d="M 580.8960813181093 514.7477904354495 A 299 299 0 1 0 97.10391868189075 514.7477904354496"
+      fill={null}
+      opacity={0.8}
+      propList={
+        [
+          "fill",
+          "stroke",
+          "strokeWidth",
+          "strokeDasharray",
+          "strokeLinecap",
+        ]
+      }
+      stroke={
+        {
+          "brushRef": "grad",
+          "type": 1,
+        }
+      }
+      strokeDasharray={
+        [
+          "1455.81403567351",
+          "1455.81403567351",
+        ]
+      }
+      strokeLinecap={1}
+      strokeWidth="28"
+    />
+  </RNSVGGroup>
+</RNSVGSvgView>
+`;

@@ -3,8 +3,10 @@ import React, {useCallback, useEffect} from 'react';
 import {Alert, SafeAreaView, StatusBar} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import {useGetDailyGeneration} from './src/hooks/useGetDailyGeneration/useGetDailyGeneration';
+import {useGetHourlyGeneration} from './src/hooks/useGetHourlyGeneration/useGetHourlyGeneration';
 import {useGetMonthlyGeneration} from './src/hooks/useGetMonthlyGeneration/useGetMonthlyGeneration';
 import {useGetYearlyGeneration} from './src/hooks/useGetYearlyGeneration/useGetYearlyGeneration';
+
 import {StackRoutes} from './src/routes/stack.routes';
 
 function App(): JSX.Element {
@@ -14,11 +16,14 @@ function App(): JSX.Element {
 
   const {fetchYearlySolarGeneration} = useGetYearlyGeneration();
 
-  const fetchAll = useCallback(() => {
+  const {fetchHourlySolarGeneration} = useGetHourlyGeneration();
+
+  const fetchAll = useCallback(async () => {
     try {
-      fetchDailySolarGeneration();
-      fetchYearlySolarGeneration();
-      fetchMonthlySolarGeneration();
+      await fetchDailySolarGeneration();
+      await fetchYearlySolarGeneration();
+      await fetchMonthlySolarGeneration();
+      await fetchHourlySolarGeneration();
     } catch (error) {
       Alert.alert('Ops, it can not be opened. Try again.');
     } finally {
@@ -26,6 +31,7 @@ function App(): JSX.Element {
     }
   }, [
     fetchDailySolarGeneration,
+    fetchHourlySolarGeneration,
     fetchMonthlySolarGeneration,
     fetchYearlySolarGeneration,
   ]);
@@ -37,7 +43,7 @@ function App(): JSX.Element {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <StatusBar barStyle="default" />
+      <StatusBar backgroundColor="transparent" translucent />
       <NavigationContainer>
         <StackRoutes />
       </NavigationContainer>
