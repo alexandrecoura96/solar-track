@@ -38,6 +38,18 @@ const initialState = {
       co2: 0,
     },
   },
+  solarGenerationHourly: {
+    data_type: '',
+    x_labels: [],
+    generation: [],
+    expected: [],
+    totals: {
+      kwh: 0,
+      percentage: 0,
+      trees: 0,
+      co2: 0,
+    },
+  },
 };
 
 export const useSolarStore = create(
@@ -51,6 +63,8 @@ export const useSolarStore = create(
       setSolarGenerationDaily: (value: GetYearlyProps) => void;
       solarGenerationMonthly: GetYearlyProps;
       setSolarGenerationMonthly: (value: GetYearlyProps) => void;
+      solarGenerationHourly: GetYearlyProps;
+      setSolarGenerationHourly: (value: GetYearlyProps) => void;
     },
   ) => ({
     setSolarGenerationYearly: (value: GetYearlyProps) => {
@@ -61,6 +75,9 @@ export const useSolarStore = create(
     },
     setSolarGenerationMonthly: (value: GetYearlyProps) => {
       set({solarGenerationMonthly: value});
+    },
+    setSolarGenerationHourly: (value: GetYearlyProps) => {
+      set({solarGenerationHourly: value});
     },
     ...initialState,
   }),
