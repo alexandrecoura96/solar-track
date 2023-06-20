@@ -14,6 +14,7 @@ export const useGetDailyGeneration = () => {
       });
       setSolarGenerationDaily(response.data.data);
     } catch (error) {
+      setLoading(false);
       Alert.alert('Ops', 'Its not possible to load the information');
     } finally {
       setLoading(false);

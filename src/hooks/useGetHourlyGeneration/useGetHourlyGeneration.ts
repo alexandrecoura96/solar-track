@@ -3,16 +3,16 @@ import {Alert} from 'react-native';
 import {api} from '../../services/axios';
 import {useSolarStore} from '../../state/solar';
 
-export const useGetMonthlyGeneration = () => {
+export const useGetHourlyGeneration = () => {
   const [loading, setLoading] = useState(true);
-  const {setSolarGenerationMonthly} = useSolarStore();
+  const {setSolarGenerationHourly} = useSolarStore();
 
-  async function fetchMonthlySolarGeneration() {
+  async function fetchHourlySolarGeneration() {
     try {
       const response = await api.get('/plant/generation/test-2023', {
-        params: {dataType: 'monthly'},
+        params: {dataType: 'hourly'},
       });
-      setSolarGenerationMonthly(response.data.data);
+      setSolarGenerationHourly(response.data.data);
     } catch (error) {
       setLoading(false);
       Alert.alert('Ops', 'Its not possible to load the information');
@@ -23,6 +23,6 @@ export const useGetMonthlyGeneration = () => {
 
   return {
     loading,
-    fetchMonthlySolarGeneration,
+    fetchHourlySolarGeneration,
   };
 };
