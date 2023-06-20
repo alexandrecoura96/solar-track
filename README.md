@@ -29,6 +29,8 @@ This project is a mobile application developed using React Native that consumes 
 
 • Skia
 
+• IOS Version (Not available yet)
+
 • A lot more, come to see =)
 
 
