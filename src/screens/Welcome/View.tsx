@@ -6,7 +6,12 @@ import {GetStartedButton} from '../../components/GetStartedButton';
 import {Background, Container, Content, Title} from './styles';
 import {WelcomeViewProps} from './types';
 
-export function View({handleNavigation, loading}: WelcomeViewProps) {
+export function View({
+  handleNavigation,
+  title,
+  getStartedButtonName,
+  loading,
+}: WelcomeViewProps) {
   if (loading) {
     return (
       <Container>
@@ -18,8 +23,11 @@ export function View({handleNavigation, loading}: WelcomeViewProps) {
       <Background source={WelcomeBackground}>
         <Container>
           <Content>
-            <Title>Using solar energy to mitigate future climate changes</Title>
-            <GetStartedButton title="Get Started" onPress={handleNavigation} />
+            <Title>{title}</Title>
+            <GetStartedButton
+              title={getStartedButtonName}
+              onPress={handleNavigation}
+            />
           </Content>
         </Container>
       </Background>

@@ -1,4 +1,5 @@
 import {IHandles} from 'react-native-modalize/lib/options';
+import {DataTypeProps} from '../../models/hooks/useHome/types/useHome';
 
 type FormattedDataProps = {
   period: string[] | null;
@@ -18,9 +19,8 @@ export interface HomeViewProps {
   onHandleDailyOption: () => void;
   onHandleMonthlyOption: () => void;
   onHandleYearlyOption: () => void;
-  selected: {
-    daily: boolean;
-    monthly: boolean;
-    yearly: boolean;
-  };
+  onHandleHourlyOption: () => void;
+  arcPeriod: string;
+  title: string;
+  selected: DataTypeProps;
 }

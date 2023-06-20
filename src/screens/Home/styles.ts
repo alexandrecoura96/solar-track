@@ -1,5 +1,8 @@
+import {StatusBar} from 'react-native';
+import {Modalize, ModalizeProps} from 'react-native-modalize';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {styled} from 'styled-components/native';
+import {ScreenHeight} from '../../utils/device';
 
 interface ModalContainerProps {
   tabBarHeight: number;
@@ -10,8 +13,8 @@ export const Scroll = styled.ScrollView.attrs({
   contentContainerStyle: {
     backgroundColor: '#000',
     gap: RFValue(64),
-    paddingTop: RFValue(24),
-    paddingBottom: RFValue(100),
+    paddingTop: StatusBar.currentHeight && StatusBar.currentHeight + 24,
+    paddingBottom: RFValue(60),
     paddingLeft: RFValue(24),
     paddingRight: RFValue(24),
   },
@@ -51,9 +54,6 @@ export const GeneralInformation = styled.View`
 
 export const TotalCardButton = styled.TouchableOpacity`
   padding: ${RFValue(8)}px ${RFValue(16)}px;
-  background-color: #121212;
-  border-color: #222;
-  border-width: 1px;
   border-radius: ${RFValue(8)}px;
   flex-direction: row;
   align-items: center;
@@ -62,8 +62,8 @@ export const TotalCardButton = styled.TouchableOpacity`
 `;
 
 export const TotalCardTitle = styled.Text`
-  font-size: ${RFValue(16)}px;
   color: #fff;
+  font-size: ${RFValue(16)}px;
   font-family: 'Inter-Regular';
 `;
 
@@ -75,8 +75,18 @@ export const TotalCardWrapper = styled.View`
 
 export const TotalCardColumn = styled.View`
   flex-direction: column;
-  gap: ${RFValue(16)}px;
 `;
+
+export const Modal = styled(Modalize).attrs({
+  adjustToContentHeight: true,
+  disableScrollIfPossible: false,
+  useNativeDriver: true,
+  modalTopOffset: ScreenHeight / 2,
+  modalStyle: {
+    backgroundColor: '#f4a460',
+  },
+  scrollViewProps: {showsVerticalScrollIndicator: false},
+})<ModalizeProps>``;
 
 export const ModalContainer = styled.View<ModalContainerProps>`
   margin-bottom: ${props => props.tabBarHeight && props.tabBarHeight}px;

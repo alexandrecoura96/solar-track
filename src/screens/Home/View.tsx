@@ -1,18 +1,17 @@
 import React from 'react';
-import {ActivityIndicator, StatusBar} from 'react-native';
-import {Modalize} from 'react-native-modalize';
+import {ActivityIndicator} from 'react-native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import PointerDown from '../../assets/svg/pointer_down.svg';
 import {Arc} from '../../components/Arc';
 import {CircularProgressBar} from '../../components/CircularProgressBar';
 import {ModalItem} from '../../components/ModalItem';
 import {TotalCardItem} from '../../components/TotalCardItem';
-import {ScreenHeight} from '../../utils/device';
 import {
   ArcDescription,
   ArcWrapper,
   Container,
   GeneralInformation,
+  Modal,
   ModalContainer,
   Scroll,
   Title,
@@ -32,7 +31,10 @@ export const View = ({
   onHandleDailyOption,
   onHandleMonthlyOption,
   onHandleYearlyOption,
+  onHandleHourlyOption,
   selected,
+  arcPeriod,
+  title,
 }: HomeViewProps) => {
   if (loading) {
     return (
@@ -41,19 +43,19 @@ export const View = ({
       </Container>
     );
   } else {
-    console.log(data.percentage);
     return (
       <>
         <Scroll>
-          <StatusBar backgroundColor="#000" />
           <ArcWrapper>
-            <Title>Summary</Title>
+            <Title>{title}</Title>
             <Arc content={data.kwh} />
-            <ArcDescription>kw produced today</ArcDescription>
+            <ArcDescription>{`kw produced ${arcPeriod}`}</ArcDescription>
           </ArcWrapper>
           <GeneralInformation>
             <TotalCardButton onPress={onHandleOpenModal}>
-              <TotalCardTitle>Daily</TotalCardTitle>
+              <TotalCardTitle>
+                {arcPeriod.charAt(0).toUpperCase() + arcPeriod.slice(1)}
+              </TotalCardTitle>
               <PointerDown height={8} width={8} fill="#fff" />
             </TotalCardButton>
             <TotalCardWrapper>
@@ -78,16 +80,7 @@ export const View = ({
             </TotalCardWrapper>
           </GeneralInformation>
         </Scroll>
-        <Modalize
-          ref={modalRef}
-          adjustToContentHeight
-          disableScrollIfPossible={false}
-          useNativeDriver
-          modalTopOffset={ScreenHeight / 2}
-          modalStyle={{
-            backgroundColor: '#f4a460',
-          }}
-          scrollViewProps={{showsVerticalScrollIndicator: false}}>
+        <Modal ref={modalRef}>
           <ModalContainer tabBarHeight={tabBarHeight + 10}>
             <ModalItem
               title="Daily"
@@ -102,11 +95,16 @@ export const View = ({
             <ModalItem
               title="Yearly"
               selected={selected.yearly}
-              hasBorder={false}
               onPress={onHandleYearlyOption}
             />
+            <ModalItem
+              title="Hourly"
+              selected={selected.hourly}
+              hasBorder={false}
+              onPress={onHandleHourlyOption}
+            />
           </ModalContainer>
-        </Modalize>
+        </Modal>
       </>
     );
   }

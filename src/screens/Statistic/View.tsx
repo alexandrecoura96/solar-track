@@ -1,22 +1,24 @@
+import {format, parseISO} from 'date-fns';
 import React from 'react';
 import {BarChart} from '../../components/BarChart';
 import {useSolarStore} from '../../state/solar';
-import {Container, Title} from './styles';
+import {Container, PeriodButton, PeriodName, Title} from './styles';
 
 export const View = () => {
   const {solarGenerationYearly} = useSolarStore();
 
   const chartData = solarGenerationYearly.x_labels.map((label, index) => ({
-    label: new Date(label).toLocaleString('default', {
-      month: 'short',
-      year: '2-digit',
-    }),
+    label: format(parseISO(label), 'MMM-yy'),
     value: solarGenerationYearly.generation[index],
+    expected: solarGenerationYearly.expected[index],
   }));
 
   return (
     <Container>
-      <Title>Statistic</Title>
+      <Title>Statistics</Title>
+      <PeriodButton>
+        <PeriodName>Yearly Generated</PeriodName>
+      </PeriodButton>
       <BarChart data={chartData} />
     </Container>
   );

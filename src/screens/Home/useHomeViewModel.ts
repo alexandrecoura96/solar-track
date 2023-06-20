@@ -1,55 +1,62 @@
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import numeral from 'numeral';
-import {useCallback, useRef, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import {Modalize} from 'react-native-modalize';
-import {useSolarStore} from '../../state/solar';
+import {useHome} from '../../hooks/useHome/useHome';
 
 export const useHomeViewModel = () => {
   const modalRef = useRef<Modalize>(null);
   const tabBarHeight = useBottomTabBarHeight();
-  const [loading] = useState(false);
+  const {
+    loading,
+    formattedData,
+    selectDailyData,
+    selectMonthlyData,
+    selectYearlyData,
+    selectHourlyData,
+  } = useHome();
+
   const [selected, setSelected] = useState({
     daily: true,
     monthly: false,
     yearly: false,
+    hourly: false,
   });
-  const {solarGenerationDaily, solarGenerationMonthly, solarGenerationYearly} =
-    useSolarStore();
 
-  const [selectedData, setSelectedData] = useState(solarGenerationDaily);
-
-  const formattedData = {
-    period: selectedData ? selectedData?.x_labels : null,
-    generation: selectedData ? selectedData?.generation : null,
-    expected: selectedData ? selectedData?.expected : null,
-    kwh: selectedData ? numeral(selectedData?.totals.kwh).format() : null,
-    percentage: selectedData ? selectedData?.totals.percentage / 100 : null,
-    trees: selectedData ? Math.round(selectedData?.totals.trees) : null,
-    co2: selectedData ? numeral(selectedData?.totals.co2).format() : null,
-  };
+  const [arcPeriod, setArcPeriod] = useState<string>('daily');
 
   const onHandleOpenModal = useCallback(() => {
     modalRef.current?.open();
   }, []);
 
+  const title = useMemo(() => 'Summary', []);
+
   const onHandleDailyOption = useCallback(() => {
-    setSelectedData(solarGenerationDaily);
-    setSelected({daily: true, monthly: false, yearly: false});
     modalRef.current?.close();
-  }, [solarGenerationDaily]);
+    selectDailyData();
+    setSelected({daily: true, monthly: false, yearly: false, hourly: false});
+    setArcPeriod('daily');
+  }, [selectDailyData]);
 
   const onHandleMonthlyOption = useCallback(() => {
-    setSelectedData(solarGenerationMonthly);
-    setSelected({daily: false, monthly: true, yearly: false});
-
     modalRef.current?.close();
-  }, [solarGenerationMonthly]);
+    selectMonthlyData();
+    setSelected({daily: false, monthly: true, yearly: false, hourly: false});
+    setArcPeriod('monthly');
+  }, [selectMonthlyData]);
 
   const onHandleYearlyOption = useCallback(() => {
-    setSelectedData(solarGenerationYearly);
-    setSelected({daily: false, monthly: false, yearly: true});
     modalRef.current?.close();
-  }, [solarGenerationYearly]);
+    selectYearlyData();
+    setSelected({daily: false, monthly: false, yearly: true, hourly: false});
+    setArcPeriod('yearly');
+  }, [selectYearlyData]);
+
+  const onHandleHourlyOption = useCallback(() => {
+    modalRef.current?.close();
+    selectHourlyData();
+    setSelected({daily: false, monthly: false, yearly: false, hourly: true});
+    setArcPeriod('hourly');
+  }, [selectHourlyData]);
 
   return {
     loading,
@@ -60,6 +67,9 @@ export const useHomeViewModel = () => {
     onHandleDailyOption,
     onHandleMonthlyOption,
     onHandleYearlyOption,
+    onHandleHourlyOption,
     selected,
+    arcPeriod,
+    title,
   };
 };
